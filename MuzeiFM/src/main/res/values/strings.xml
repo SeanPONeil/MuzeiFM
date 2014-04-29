@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MuzeiFM</string>
+  <string name="app_name">MuzeiFm</string>
+  <string name="source_name">Last.fm</string>
+  <string name="source_description">Top Albums from Last.fm</string>
 </resources>
