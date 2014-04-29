@@ -1,4 +1,5 @@
 apply plugin: 'android'
+apply plugin: 'crashlytics'
 
 android {
   compileSdkVersion 19
@@ -23,9 +24,15 @@ android {
   }
 }
 
+repositories {
+  mavenCentral()
+  maven { url 'http://download.crashlytics.com/maven' }
+}
+
 dependencies {
-  compile 'com.squareup.retrofit:retrofit:1.5.0'
-  compile 'com.squareup.okhttp:okhttp:1.5.2'
-  compile 'com.jakewharton.timber:timber:2.2.2'
+  compile 'com.crashlytics.android:crashlytics:1.+'
   compile 'com.google.android.apps.muzei:muzei-api:+'
+  compile 'com.jakewharton.timber:timber:2.2.2'
+  compile 'com.squareup.okhttp:okhttp:1.5.2'
+  compile 'com.squareup.retrofit:retrofit:1.5.0'
 }

@@ -2,6 +2,7 @@ package com.seanponeil.muzeifm;
 
 import android.content.Intent;
 import android.net.Uri;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import java.util.Random;
@@ -30,6 +31,7 @@ public class LastFmArtSource extends RemoteMuzeiArtSource {
     if (BuildConfig.DEBUG) {
       Timber.plant(new DebugTree());
     }
+    Crashlytics.start(this);
   }
 
   @Override
