@@ -30,8 +30,8 @@ repositories {
 }
 
 dependencies {
-  compile 'com.crashlytics.android:crashlytics:1.+'
-  compile 'com.google.android.apps.muzei:muzei-api:+'
+  compile 'com.crashlytics.android:crashlytics:1.1.13'
+  compile 'com.google.android.apps.muzei:muzei-api:1.0'
   compile 'com.jakewharton.timber:timber:2.2.2'
   compile 'com.squareup.okhttp:okhttp:1.5.2'
   compile 'com.squareup.retrofit:retrofit:1.5.0'
