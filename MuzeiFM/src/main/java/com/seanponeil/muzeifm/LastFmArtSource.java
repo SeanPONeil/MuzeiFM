@@ -47,8 +47,10 @@ public class LastFmArtSource extends RemoteMuzeiArtSource {
               }
             })
             .setErrorHandler(new ErrorHandler() {
-              @Override
-              public Throwable handleError(RetrofitError retrofitError) {
+              @Override public Throwable handleError(RetrofitError retrofitError) {
+                Crashlytics.setString("RetrofitErrorUrl", retrofitError.getUrl());
+                Crashlytics.setString("RetrofitErrorBody",
+                    (String) retrofitError.getBodyAs(String.class));
                 int statusCode = retrofitError.getResponse().getStatus();
                 if (retrofitError.isNetworkError() || (500 <= statusCode && statusCode < 600)) {
                   return new RetryException();
