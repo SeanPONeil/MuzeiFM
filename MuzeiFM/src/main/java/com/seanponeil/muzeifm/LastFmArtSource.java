@@ -34,8 +34,7 @@ public class LastFmArtSource extends RemoteMuzeiArtSource {
     Crashlytics.start(this);
   }
 
-  @Override
-  protected void onTryUpdate(int reason) throws RetryException {
+  @Override protected void onTryUpdate(int reason) throws RetryException {
     currentToken = (getCurrentArtwork() != null) ? getCurrentArtwork().getToken() : null;
 
     RestAdapter.Builder restAdapterBuilder =
