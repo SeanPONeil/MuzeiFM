@@ -4,3 +4,4 @@
 .DS_Storei
 *.iml
 build/
+com_crashlytics_export_strings.xml
