@@ -8,6 +8,10 @@ import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.seanponeil.muzeifm.data.DataModule;
 import com.seanponeil.muzeifm.data.api.LastFmApiModule;
 import com.seanponeil.muzeifm.data.api.LastFmService;
+import com.seanponeil.muzeifm.data.api.model.Album;
+import com.seanponeil.muzeifm.data.api.model.Artist;
+import com.seanponeil.muzeifm.data.api.model.TopAlbumsResponse;
+import com.seanponeil.muzeifm.data.api.model.TopArtistsResponse;
 import dagger.ObjectGraph;
 import java.util.Random;
 import javax.inject.Inject;
@@ -70,7 +74,7 @@ public class MuzeiFMArtSource extends RemoteMuzeiArtSource {
       return;
     }
 
-    TopAlbumsResponse.Album album;
+    Album album;
     String token;
     while (true) {
       album = response.topalbums.album.get(new Random().nextInt(response.topalbums.album.size()));
@@ -104,7 +108,7 @@ public class MuzeiFMArtSource extends RemoteMuzeiArtSource {
       scheduleUpdate(System.currentTimeMillis() + ROTATE_TIME_MILLIS);
       return;
     }
-    TopArtistsResponse.Artist artist;
+    Artist artist;
     String token;
     while (true) {
       artist =

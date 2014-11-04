@@ -1,7 +1,7 @@
 package com.seanponeil.muzeifm.data.api;
 
-import com.seanponeil.muzeifm.TopAlbumsResponse;
-import com.seanponeil.muzeifm.TopArtistsResponse;
+import com.seanponeil.muzeifm.data.api.model.TopAlbumsResponse;
+import com.seanponeil.muzeifm.data.api.model.TopArtistsResponse;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Query;
