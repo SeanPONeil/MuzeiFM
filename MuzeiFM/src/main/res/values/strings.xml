@@ -2,4 +2,6 @@
   <string name="app_name">MuzeiFm</string>
   <string name="source_name">Last.fm</string>
   <string name="source_description">Top Albums from Last.fm</string>
+  <string name="title_settings">MuzeiFm Settings</string>
+  <string name="settings_username_hint">Last.fm Username:</string>
 </resources>

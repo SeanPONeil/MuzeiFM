@@ -23,7 +23,18 @@
       <meta-data
         android:name="color"
         android:value="#fa0" />
+      <meta-data
+        android:name="settingsActivity"
+        android:value=".SettingsActivity" />
     </service>
+
+    <activity
+      android:name=".SettingsActivity"
+      android:exported="true"
+      android:label="@string/title_settings"
+      android:theme="@style/Theme.MuzeiFM.Settings"
+      android:windowSoftInputMode="adjustNothing">
+    </activity>
 
     <meta-data
       android:name="com.crashlytics.ApiKey"
