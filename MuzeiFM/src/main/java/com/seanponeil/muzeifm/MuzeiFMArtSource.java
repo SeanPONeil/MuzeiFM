@@ -5,71 +5,45 @@ import android.net.Uri;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
+import com.seanponeil.muzeifm.data.DataModule;
+import com.seanponeil.muzeifm.data.api.LastFmApiModule;
+import com.seanponeil.muzeifm.data.api.LastFmService;
+import dagger.ObjectGraph;
 import java.util.Random;
-import retrofit.ErrorHandler;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
-import retrofit.RetrofitError;
+import javax.inject.Inject;
 import timber.log.Timber;
 import timber.log.Timber.DebugTree;
 
-public class LastFmArtSource extends RemoteMuzeiArtSource {
+public class MuzeiFMArtSource extends RemoteMuzeiArtSource {
 
-  LastFmService lastFmService;
+  ObjectGraph objectGraph;
+
+  @Inject LastFmService lastFmService;
   String currentToken;
 
   private static final int ROTATE_TIME_MILLIS = 60 * 60 * 1000; // rotate every hour
 
-  public LastFmArtSource() {
-    super("LastFmArtSource");
+  public MuzeiFMArtSource() {
+    super("MuzeiFmArtSource");
   }
 
   @Override public void onCreate() {
     super.onCreate();
     setUserCommands(BUILTIN_COMMAND_ID_NEXT_ARTWORK);
+    buildObjectGraphAndInject();
     if (BuildConfig.DEBUG) {
       Timber.plant(new DebugTree());
     }
     Crashlytics.start(this);
   }
 
+  public void buildObjectGraphAndInject() {
+    objectGraph = ObjectGraph.create(new DataModule(this), new LastFmApiModule());
+    objectGraph.inject(this);
+  }
+
   @Override protected void onTryUpdate(int reason) throws RetryException {
     currentToken = (getCurrentArtwork() != null) ? getCurrentArtwork().getToken() : null;
-
-    RestAdapter.Builder restAdapterBuilder =
-        new RestAdapter.Builder().setEndpoint("http://ws.audioscrobbler.com/2.0/")
-            .setRequestInterceptor(new RequestInterceptor() {
-              @Override
-              public void intercept(RequestFacade request) {
-                request.addQueryParam("api_key", Config.LAST_FM_API_KEY);
-              }
-            })
-            .setErrorHandler(new ErrorHandler() {
-              @Override public Throwable handleError(RetrofitError retrofitError) {
-                try {
-                  Crashlytics.setString("RetrofitErrorUrl", retrofitError.getUrl());
-                  Crashlytics.setString("RetrofitErrorBody",
-                      (String) retrofitError.getBodyAs(String.class));
-                } catch (Exception e) {
-                  Timber.d("Reporting to Crashlytics threw an exception");
-                }
-                int statusCode = retrofitError.getResponse().getStatus();
-                if (retrofitError.isNetworkError() || (500 <= statusCode && statusCode < 600)) {
-                  return new RetryException();
-                }
-                scheduleUpdate(System.currentTimeMillis() + ROTATE_TIME_MILLIS);
-                return retrofitError;
-              }
-            });
-
-    if (BuildConfig.DEBUG) {
-      restAdapterBuilder.setLogLevel(LogLevel.FULL);
-    }
-
-    lastFmService = restAdapterBuilder
-        .build()
-        .create(LastFmService.class);
 
     switch (new Random().nextInt() % 2) {
       case 0:

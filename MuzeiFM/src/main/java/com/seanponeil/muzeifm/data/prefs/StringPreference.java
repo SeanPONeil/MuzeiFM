@@ -1,4 +1,4 @@
-package com.seanponeil.muzeifm;
+package com.seanponeil.muzeifm.data.prefs;
 
 import android.content.SharedPreferences;
 

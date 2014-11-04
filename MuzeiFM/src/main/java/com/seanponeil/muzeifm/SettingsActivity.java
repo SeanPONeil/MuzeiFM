@@ -6,6 +6,8 @@ import android.widget.EditText;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import com.seanponeil.muzeifm.data.DataModule;
+import com.seanponeil.muzeifm.data.prefs.StringPreference;
 import dagger.ObjectGraph;
 import javax.inject.Inject;
 
