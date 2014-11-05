@@ -2,10 +2,10 @@ package com.seanponeil.muzeifm.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.seanponeil.muzeifm.LastFmUsername;
 import com.seanponeil.muzeifm.MuzeiFMArtSource;
 import com.seanponeil.muzeifm.SettingsActivity;
 import com.seanponeil.muzeifm.data.api.LastFmApiModule;
+import com.seanponeil.muzeifm.data.prefs.IntPreference;
 import com.seanponeil.muzeifm.data.prefs.StringPreference;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
@@ -50,6 +50,16 @@ public final class DataModule {
 
   @Provides @LastFmUsername StringPreference provideLastFmUsername(SharedPreferences preferences) {
     return new StringPreference(preferences, "username");
+  }
+
+  @Provides @LastFmPeriod StringPreference provideLastFmPeriod(SharedPreferences preferences) {
+    return new StringPreference(preferences, "period", "6month");
+  }
+
+  @Provides @ArtworkRotationTime IntPreference provideArtworkRotationTime(
+      SharedPreferences preferences) {
+    int hourInMillis = 3 * 60 * 60 * 1000; // rotate every three hours
+    return new IntPreference(preferences, "rotation_time", hourInMillis);
   }
 
   static OkHttpClient createOkHttpClient(Context context) {

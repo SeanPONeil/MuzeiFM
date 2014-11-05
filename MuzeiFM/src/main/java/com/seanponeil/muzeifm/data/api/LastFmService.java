@@ -8,14 +8,11 @@ import retrofit.http.Query;
 
 public interface LastFmService {
   @GET("/?method=user.getTopAlbums")
-  public TopAlbumsResponse getTopAlbums(@Query("user") String user, @Query("period") String period,
-      @Query("limit") String limit, @Query("page") String page);
+  public TopAlbumsResponse getTopAlbums(@Query("limit") String limit, @Query("page") String page);
 
   @GET("/?method=user.getTopArtists")
-  public TopArtistsResponse getTopArtists(@Query("user") String user,
-      @Query("period") String period, @Query("limit") String limit, @Query("page") String page);
+  public TopArtistsResponse getTopArtists(@Query("limit") String limit, @Query("page") String page);
 
   @GET("/?method=user.getTopArtists")
-  public Response getTopArtistsResponse(@Query("user") String user,
-      @Query("period") String period, @Query("limit") String limit, @Query("page") String page);
+  public Response getTopArtistsResponse(@Query("limit") String limit, @Query("page") String page);
 }

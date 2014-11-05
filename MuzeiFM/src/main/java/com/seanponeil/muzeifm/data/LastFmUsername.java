@@ -1,4 +1,4 @@
-package com.seanponeil.muzeifm;
+package com.seanponeil.muzeifm.data;
 
 import java.lang.annotation.Retention;
 import javax.inject.Qualifier;
