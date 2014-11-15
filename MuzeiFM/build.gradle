@@ -1,23 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
 
-android {
-  compileSdkVersion 21
-  buildToolsVersion "21.1.0"
-
-  defaultConfig {
-    minSdkVersion 17
-    targetSdkVersion 21
-    versionCode 1
-    versionName "1.0"
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_7
-    targetCompatibility JavaVersion.VERSION_1_7
-  }
-}
-
 repositories {
   mavenCentral()
   maven { url 'http://download.crashlytics.com/maven' }
@@ -32,4 +15,24 @@ dependencies {
   provided 'com.squareup.dagger:dagger-compiler:1.2.2'
   compile 'com.squareup.okhttp:okhttp:1.5.2'
   compile 'com.squareup.retrofit:retrofit:1.5.0'
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.0"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 21
+
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "LASTFM_API_KEY", LASTFM_API_KEY
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }

@@ -1,5 +1,6 @@
 package com.seanponeil.muzeifm.data.api;
 
+import com.seanponeil.muzeifm.BuildConfig;
 import com.squareup.okhttp.OkHttpClient;
 import dagger.Module;
 import dagger.Provides;
@@ -16,10 +17,9 @@ import retrofit.client.OkClient;
 )
 public final class LastFmApiModule {
   public static final String LAST_FM_PRODUCTION_URL = "http://ws.audioscrobbler.com/2.0/";
-  public static final String LAST_FM_API_KEY = "63314efccbb3250fb901a950a7401f12";
 
   @Provides @Singleton @LastFmApiKey String provideLastFmApiKey() {
-    return LAST_FM_API_KEY;
+    return BuildConfig.LASTFM_API_KEY;
   }
 
   @Provides @Singleton Endpoint provideEndpoint() {
