@@ -43,13 +43,12 @@ public class LastFmArtwork {
 
     Album album = response.topalbums.album.get(new Random().nextInt(response.topalbums.album.size()));
 
-    //Replace Image URI with high res image URI
-    String link = album.image.get(3).text;
-    String highResLink = link.replace("300x300", "_");
+    // Last image in artist image list has the highest resolution
+    String link = album.image.get(album.image.size()-1).text;
     return new Artwork.Builder()
         .title(album.name)
         .byline(album.artist.name)
-        .imageUri(Uri.parse(highResLink))
+        .imageUri(Uri.parse(link))
         .token(album.name)
         .viewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(album.url)))
         .build();
@@ -70,8 +69,8 @@ public class LastFmArtwork {
     Artist artist =
         response.topartists.artist.get(new Random().nextInt(response.topartists.artist.size()));
 
-    //Replace Image URI with high res image URI
-    String link = artist.image.get(4).text;
+    // Last image in artist image list has the highest resolution
+    String link = artist.image.get(artist.image.size()-1).text;
     return new Artwork.Builder()
         .title(artist.name)
         .byline("Play Count: " + artist.playcount)
