@@ -21,13 +21,16 @@ public class SettingsActivity extends Activity {
   @OnClick(R.id.save) void onSave() {
     // TODO: Check to see if username is valid
     lastFmUsername.set(username.getText().toString());
+    finish();
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
-    ButterKnife.inject(this);
 
+    ButterKnife.inject(this);
     ObjectGraph.create(new DataModule(this)).inject(this);
+
+    username.setText(lastFmUsername.get());
   }
 }
