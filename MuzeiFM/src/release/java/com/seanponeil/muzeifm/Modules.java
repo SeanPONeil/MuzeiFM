@@ -8,7 +8,7 @@ final class Modules {
   static Object[] list(Context context) {
     return new Object[] {
         new DataModule(context),
-        new LastFmApiModule(),
+        new LastFmApiModule()
     };
   }
 
